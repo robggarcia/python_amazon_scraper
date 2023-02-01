@@ -22,7 +22,9 @@ price = float(whole + fraction)
 print(price)
 
 item = amazon_url[23:40]
-print(item)
+
+price_to_buy = 400
+
 # smtplib.SMTP("smtp.gmail.com", port=587)
 
 host = "smtp.gmail.com"
@@ -30,9 +32,10 @@ sender = "robgordongarcia@gmail.com"
 password = ""
 receiver = "robgordongarcia@gmail.com"
 
-with smtplib.SMTP("smtp.gmail.com") as connection:
-    connection.starttls()
-    connection.login(user=sender, password=password)
-    connection.sendmail(from_addr=sender,
-                        to_addrs=receiver,
-                        msg=f"Subject:{item}\n\nA {item} is on sale on Amazon for only ${price}!\nOrder Now\n\n{amazon_url}")
+if price <= price_to_buy:
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()
+        connection.login(user=sender, password=password)
+        connection.sendmail(from_addr=sender,
+                            to_addrs=receiver,
+                            msg=f"Subject:{item}\n\nA {item} is on sale on Amazon for only ${price}!\nOrder Now\n\n{amazon_url}")
